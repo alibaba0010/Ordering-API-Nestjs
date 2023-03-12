@@ -1,6 +1,6 @@
 FROM node:18-alpine As development
 
-# RUN apk update && apk add bash
+# # RUN apk update && apk add bash
 
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -14,19 +14,17 @@ CMD [ "/bin/sh" ]
 
 RUN npm run build
 
-EXPOSE 3001
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+# COPY package*.json ./
 
 RUN npm install --only=production
 
-COPY . .
+# COPY --from=development /usr/src/app/dist ./dist
 
-COPY --from=development /usr/src/app/dist ./dist
+# CMD ["node", "dist/apps/orders/main"]
 
-CMD ["node", "dist/apps/orders/main"]
+EXPOSE 3001

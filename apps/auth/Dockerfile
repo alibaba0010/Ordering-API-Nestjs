@@ -14,7 +14,7 @@ CMD [ "/bin/sh" ]
 
 RUN npm run build
 
-EXPOSE 3001
+EXPOSE 3002
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
