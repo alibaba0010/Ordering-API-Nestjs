@@ -1,19 +1,17 @@
 FROM node:18-alpine As development
 
-# RUN apk update && apk add bash
-
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 WORKDIR /usr/src/app
 
-COPY ./ ./
+COPY package*.json ./
 
 RUN npm install
 
-CMD [ "/bin/sh" ]
+COPY ./ ./
+
 
 RUN npm run build
 
+FROM node:alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}

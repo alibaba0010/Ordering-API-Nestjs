@@ -1,20 +1,16 @@
 FROM node:18-alpine As development
 
-# RUN apk update && apk add bash
-
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 WORKDIR /usr/src/app
-
-COPY ./ ./
+COPY package*.json ./
 
 RUN npm install
 
-CMD [ "/bin/sh" ]
+COPY ./ ./
 
 RUN npm run build
 
-EXPOSE 3002
+FROM node:alpine as production
+
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
@@ -30,3 +26,5 @@ COPY . .
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/auth/main"]
+
+EXPOSE 3002
