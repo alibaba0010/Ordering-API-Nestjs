@@ -1,4 +1,4 @@
-service: aws-nest-ordering-api
+service: aws-nest-orderingapi
 frameworkVersion: '3'
 
 provider:
