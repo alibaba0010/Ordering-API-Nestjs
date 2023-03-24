@@ -4,9 +4,12 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs18.x
+  stage: dev # Set the default stage used. Default is dev
+  region: eu-north-1 # us-east-1 Overwrite the default region used. D
 
 functions:
   api:
     handler: index.handler
     events:
       - httpApi: '*'
+# -s3: ${env:BUCKET}
