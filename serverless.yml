@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs18.x
   stage: dev # Set the default stage used. Default is dev
-  region: eu-north-1 # us-east-1 Overwrite the default region used. D
+  region:  us-east-1 # Overwrite the default region used. D
 
 functions:
   api:

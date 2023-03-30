@@ -1,4 +1,4 @@
-import { serverless } from 'serverless-http';
+import { serverless } from 'serverless-express';
 import express from 'express';
 const app = express();
 
