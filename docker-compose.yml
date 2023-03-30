@@ -43,7 +43,7 @@ services:
       target: development
     command: npm run start:dev auth
     ports:
-      - "3002:3002"
+      - '3002:3002'
     env_file:
       - ./apps/auth/.env
     depends_on:
@@ -63,8 +63,8 @@ services:
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
-      - MONGODB_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_ROOT_PASSWORD=${MONGO_DB_ROOT_PASSWORD}
+      - MONGODB_REPLICA_SET_KEY=nasacluster.xxss1.mongodb.net
     volumes:
       - 'mongodb_master_data:/bitnami/mongodb'
     ports:
@@ -78,8 +78,8 @@ services:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
       - MONGODB_REPLICA_SET_MODE=secondary
       - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=${MONGO_DB_ROOT_PASSWORD}
+      - MONGODB_REPLICA_SET_KEY=nasacluster.xxss1.mongodb.net
 
   mongodb-arbiter:
     image: docker.io/bitnami/mongodb:6.0
@@ -89,8 +89,8 @@ services:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
       - MONGODB_REPLICA_SET_MODE=arbiter
       - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=${MONGO_DB_ROOT_PASSWORD}
+      - MONGODB_REPLICA_SET_KEY=nasacluster.xxss1.mongodb.net
 
 volumes:
   mongodb_master_data:
