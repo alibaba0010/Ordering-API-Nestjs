@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/orders/Dockerfile
-      # target: development
+      target: development
     command: npm run start:dev orders
     env_file:
       - ./apps/orders/.env
