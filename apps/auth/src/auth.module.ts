@@ -4,10 +4,10 @@ import { AuthService } from './auth.service';
 import { DatabaseModule, RabbitMqModule } from '@app/common';
 import { UserModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from 'joi';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import * as Joi from 'joi';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SEC'),
-        signOptions: { expiresIn: `${configService.get('JWT_EXP')}` },
+        signOptions: { expiresIn: `${configService.get('JWT_EXP')}s` },
       }),
       inject: [ConfigService],
     }),
@@ -35,3 +35,5 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
+
+// checked

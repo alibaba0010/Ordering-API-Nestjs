@@ -8,11 +8,18 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
   @Post('create-order')
   @UseGuards(JwtAuthGuard)
-  async createOrder(@Body() request: CreateOrder, @Req() req: any ) {
-    return await this.ordersService.createOrder(request, req.cookies?.Authentication);
+  async createOrder(@Body() request: CreateOrder, @Req() req: any) {
+    const order = await this.ordersService.createOrder(
+      request,
+      req.cookies?.Authentication,
+    );
+    console.log('order: ', order);
+    return order;
   }
+
   @Get()
-  async getOrders(){
-    return await this.ordersService.getOrders()
+  @UseGuards(JwtAuthGuard)
+  async getOrders() {
+    return await this.ordersService.getOrders();
   }
 }

@@ -1,3 +1,4 @@
+//checked
 import {
   CanActivate,
   ExecutionContext,
@@ -23,7 +24,7 @@ export class JwtAuthGuard implements CanActivate {
       })
       .pipe(
         tap((res) => {
-          this.addUser(res, context);  
+          this.addUser(res, context);
         }),
         catchError(() => {
           throw new UnauthorizedException();
@@ -47,6 +48,7 @@ export class JwtAuthGuard implements CanActivate {
   }
 
   private addUser(user: any, context: ExecutionContext) {
+    console.log('in addUser');
     if (context.getType() === 'rpc') {
       context.switchToRpc().getData().user = user;
     } else if (context.getType() === 'http') {

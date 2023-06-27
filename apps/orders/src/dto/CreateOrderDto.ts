@@ -1,5 +1,5 @@
 
-
+// checked
 import {
   IsString,
   IsNotEmpty,
@@ -18,7 +18,7 @@ export class CreateOrder {
 
   @IsPhoneNumber()
   @IsNotEmpty()
-  contact: number;
+  contact: number; //string 
 
   @IsPositive()
   @IsNotEmpty()

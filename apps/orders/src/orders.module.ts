@@ -1,3 +1,4 @@
+//checked
 import { Module } from '@nestjs/common';
 import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
@@ -20,7 +21,6 @@ import { BILLING_SERVICE } from './constants/service';
       envFilePath: './apps/orders/.env',
     }),
     DatabaseModule,
-
     MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
     RabbitMqModule.register({
       name: BILLING_SERVICE,

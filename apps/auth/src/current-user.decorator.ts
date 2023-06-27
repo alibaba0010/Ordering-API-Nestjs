@@ -1,3 +1,4 @@
+// checked
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { User } from './users/schemas/user.schema';
 
@@ -9,7 +10,6 @@ export const getCurrentUserByContext = (context: ExecutionContext): User => {
     return context.switchToRpc().getData().user;
   }
 };
-
 export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) =>
     getCurrentUserByContext(context),
