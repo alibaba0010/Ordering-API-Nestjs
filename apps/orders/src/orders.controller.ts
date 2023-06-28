@@ -9,16 +9,17 @@ export class OrdersController {
   @Post('create-order')
   @UseGuards(JwtAuthGuard)
   async createOrder(@Body() request: CreateOrder, @Req() req: any) {
-    const order = await this.ordersService.createOrder(
+    console.log('cookie controller: ', req.cookies?.Authentication);
+    console.log('cookie controller: ', req.user);
+
+    return await this.ordersService.createOrder(
       request,
       req.cookies?.Authentication,
     );
-    console.log('order: ', order);
-    return order;
+   
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   async getOrders() {
     return await this.ordersService.getOrders();
   }

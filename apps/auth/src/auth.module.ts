@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { DatabaseModule, RabbitMqModule } from '@app/common';
@@ -36,4 +36,4 @@ import * as Joi from 'joi';
 })
 export class AuthModule {}
 
-// checked
+

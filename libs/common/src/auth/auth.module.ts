@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule  } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import { RabbitMqModule } from '../rabbitmq/rabbitmq.module';
 import { AUTH_SERVICE } from './services';

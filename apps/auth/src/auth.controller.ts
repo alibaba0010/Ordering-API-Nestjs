@@ -26,6 +26,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @MessagePattern('validateUser')
   async validateUser(@CurrentUser() user: User) {
+    console.log('In validateUser Controller: ', user);
     return user;
   }
   logOut(@Res({ passthrough: true }) response: Response) {
