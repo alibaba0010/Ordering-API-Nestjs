@@ -1,4 +1,3 @@
-//checked
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrder } from './dto/CreateOrderDto';
 import { OrderRepository } from './schemas/order.repository';

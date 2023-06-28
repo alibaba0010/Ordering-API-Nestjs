@@ -9,14 +9,10 @@ export class OrdersController {
   @Post('create-order')
   @UseGuards(JwtAuthGuard)
   async createOrder(@Body() request: CreateOrder, @Req() req: any) {
-    console.log('cookie controller: ', req.cookies?.Authentication);
-    console.log('cookie controller: ', req.user);
-
     return await this.ordersService.createOrder(
       request,
       req.cookies?.Authentication,
     );
-   
   }
 
   @Get()

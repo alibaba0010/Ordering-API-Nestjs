@@ -6,7 +6,6 @@ import { Transport } from '@nestjs/microservices/enums';
 export class RabbitMqServices {
   constructor(private readonly configService: ConfigService) {}
   getOptions(queue: string, noAck = false): RmqOptions {
-    console.log('Queue: ', queue);
     return {
       transport: Transport.RMQ,
       options: {

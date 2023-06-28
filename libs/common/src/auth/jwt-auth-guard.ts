@@ -1,4 +1,3 @@
-//checked
 import {
   CanActivate,
   ExecutionContext,
@@ -13,24 +12,21 @@ import { Observable, catchError, tap } from 'rxjs';
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(@Inject(AUTH_SERVICE) private authClient: ClientProxy) {}
-  canActivate(
+  async canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    console.log('IN JWTGUARD');
+  ): Promise<boolean | Observable<boolean>> {
     const authentication = this.getAuthentication(context);
-    console.log('authentication: ', authentication);
-    return this.authClient
-      .send('validateUser', {
-        Authentication: authentication,
-      })
-      .pipe(
-        tap((res) => {
-          this.addUser(res, context);
-        }),
-        catchError(() => {
-          throw new UnauthorizedException();
-        }),
-      );
+    return this.authClient.send('validateUser', {
+      Authentication: authentication,
+    })
+    .pipe(
+      tap((res) => {
+        this.addUser(res, context);
+      }),
+      catchError(() => {
+        throw new UnauthorizedException();
+      }),
+    );
   }
   private getAuthentication(context: ExecutionContext) {
     let authentication: string;
@@ -40,6 +36,7 @@ export class JwtAuthGuard implements CanActivate {
       authentication = context.switchToHttp().getRequest()
         .cookies?.Authentication;
     }
+
     if (!authentication) {
       throw new UnauthorizedException(
         'No value was provided for Authentication',
@@ -49,7 +46,6 @@ export class JwtAuthGuard implements CanActivate {
   }
 
   private addUser(user: any, context: ExecutionContext) {
-    console.log('in addUser: ', user);
     if (context.getType() === 'rpc') {
       context.switchToRpc().getData().user = user;
     } else if (context.getType() === 'http') {
