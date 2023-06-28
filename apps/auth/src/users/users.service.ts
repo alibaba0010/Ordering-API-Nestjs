@@ -19,7 +19,8 @@ export class UserService {
       ...request,
       password: await bcrypt.hash(request.password, salt),
     });
-    return user;
+    const {password, ...others} = user
+    return others;
   }
 
   private async validateCreateUserRequest(request: CreateUserRequest) {

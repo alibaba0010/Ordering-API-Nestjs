@@ -12,21 +12,20 @@ import { Observable, catchError, tap } from 'rxjs';
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(@Inject(AUTH_SERVICE) private authClient: ClientProxy) {}
-  async canActivate(
-    context: ExecutionContext,
-  ): Promise<boolean | Observable<boolean>> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const authentication = this.getAuthentication(context);
-    return this.authClient.send('validateUser', {
-      Authentication: authentication,
-    })
-    .pipe(
-      tap((res) => {
-        this.addUser(res, context);
-      }),
-      catchError(() => {
-        throw new UnauthorizedException();
-      }),
-    );
+    return this.authClient
+      .send('validateUser', {
+        Authentication: authentication,
+      })
+      .pipe(
+        tap((res) => {
+          this.addUser(res, context);
+        }),
+        catchError(() => {
+          throw new UnauthorizedException();
+        }),
+      );
   }
   private getAuthentication(context: ExecutionContext) {
     let authentication: string;
