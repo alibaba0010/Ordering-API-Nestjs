@@ -18,7 +18,8 @@ export class BillingController {
   @EventPattern('order_created')
   @UseGuards(JwtAuthGuard)
   async handleOrderCreated(@Payload() data: any, @Ctx() context: RmqContext) {
+    // payload is the data from the rmq microservices and contains data, context
     this.billingService.bill(data);
-    this.rmqService.ack(context);
+    this.rmqService.ack(context); // set acknowledgement
   }
 }

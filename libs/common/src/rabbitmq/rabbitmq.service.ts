@@ -20,6 +20,6 @@ export class RabbitMqServices {
   ack(context: RmqContext) {
     const channel = context.getChannelRef();
     const originalMessage = context.getMessage();
-    channel.ack(originalMessage);
+    channel.ack(originalMessage); // set ack to true
   }
 }
