@@ -18,6 +18,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     await this.authService.login(user, response);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...others } = user;
 
     response.json(others);
